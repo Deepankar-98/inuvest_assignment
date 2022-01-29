@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block outside-container %}
+    <a class="btn btn-outline-primary" href="{% url "home-page" %}">&lt;-- Re-Upload CSV</a>
+{% endblock %}
+
+{% block content %}
+    <h2 class="text-center">Download the preprocessed CSV:</h2>
+    <br>
+    <form method="post">
+        {% csrf_token %}
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Download Output</button>
+        </div>
+    </form>
+{% endblock %} 
+
+<!-- Display Processed dataframe: Only for degugging purpose -->
+{% comment %} {% block table-preview %}
+    {% if is_empty == False %}
+        <h4 class="text-center">Preview of the table Data</h4>
+        <p>{{ processed_data.columns }}</p>
+        <p>{{ processed_data }}</p>
+    {% endif %}
+{% endblock %} {% endcomment %}
+
+{% block graph %}
+    {% if is_empty == False %}
+        {{ graph_div|safe }}
+    {% endif %}
+{% endblock %}
